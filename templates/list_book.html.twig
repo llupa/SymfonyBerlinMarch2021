@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2 class="underline">Books</h2>
+    <a class="button" href="{{ path('create_book') }}">+ Add new</a>
+    <br />
+    <br />
+    <table>
+        <tr>
+            <th>ISBN</th>
+            <th>Price</th>
+            <th>Title</th>
+            <th>Publisher</th>
+            <th>Authors</th>
+            <th>History</th>
+            <th></th>
+        </tr>
+        {% for book in data %}
+            <tr>
+                <td>{{ book.isbn }}</td>
+                <td>{{ book.price }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.publisher.name }}</td>
+                <td>
+                    {% for author in book.authors %}
+                        {{ author.fullName }}{% if not loop.last %},{% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="{{ path('list_price_history', {id: book.isbn}) }}">show</a>
+                </td>
+                <td>
+                    <a href="{{ path('edit_book', {id: book.isbn}) }}">edit</a>
+                    <a href="{{ path('remove_book', {id: book.isbn}) }}">delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br />
+    <a href="{{ path('index') }}">Home</a>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('index') }}">Home</a>
+    <br />
+    <br />
+    <br />
+    {{ form_start(form) }}
+    <div class="grid">
+        <div class="label">{{ form_label(form.name) }}</div>
+        <div>
+            {{ form_widget(form.name) }}
+            {{ form_errors(form.name) }}
+        </div>
+
+        <div class="label"></div>
+        <div>
+            <button>Submit</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock body %}

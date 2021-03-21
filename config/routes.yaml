@@ -1,0 +1,55 @@
+index:
+    path: /
+    controller: App\Controller\IndexAction
+    
+list_author:
+    path: /list/authors
+    controller: App\Controller\ListController::listAuthorAction
+    
+list_book:
+    path: /list/books
+    controller: App\Controller\ListController::listBookAction
+    
+list_price_history:
+    path: /list/books/{id}/price-history
+    controller: App\Controller\ListController::listPriceHistoryAction
+    
+list_publisher:
+    path: /list/publishers
+    controller: App\Controller\ListController::listPublisherAction
+    
+create_author:
+    path: /create/authors
+    controller: App\Controller\CreateController::createAuthorAction
+    
+create_book:
+    path: /create/books
+    controller: App\Controller\CreateController::createBookAction
+    
+create_publisher:
+    path: /create/publishers
+    controller: App\Controller\CreateController::createPublisherAction
+    
+edit_author:
+    path: /edit/authors/{id}
+    controller: App\Controller\EditController::editAuthorAction
+
+edit_book:
+    path: /edit/books/{id}
+    controller: App\Controller\EditController::editBookAction
+
+edit_publisher:
+    path: /edit/publishers/{id}
+    controller: App\Controller\EditController::editPublisherAction
+    
+remove_author:
+    path: /remove/authors/{id}
+    controller: App\Controller\RemoveController::removeAuthorAction
+
+remove_book:
+    path: /remove/books/{id}
+    controller: App\Controller\RemoveController::removeBookAction
+
+remove_publisher:
+    path: /remove/publishers/{id}
+    controller: App\Controller\RemoveController::removePublisherAction

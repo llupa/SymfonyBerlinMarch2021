@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2 class="underline">Publishers</h2>
+    <a class="button" href="{{ path('create_publisher') }}">+ Add new</a>
+    <br />
+    <br />
+    <table>
+        <tr>
+            <th>Name</th>
+            <th></th>
+        </tr>
+        {% for publisher in data %}
+            <tr>
+                <td>{{ publisher.name }}</td>
+                <td>
+                    <a href="{{ path('edit_publisher', {id: publisher.id}) }}">edit</a>
+                    <a href="{{ path('remove_publisher', {id: publisher.id}) }}">delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br />
+    <a href="{{ path('index') }}">Home</a>
+{% endblock %}

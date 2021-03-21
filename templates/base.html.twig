@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+            {#{{ encore_entry_link_tags('app') }}#}
+            <style>
+                html {text-align: center; font-family: Verdana,Geneva,sans-serif}
+                body {width: 75%; margin:50px auto 50px auto; text-align: left}
+                h1 {width: 100%; text-align:center}
+                .button {
+                    font-size: 100%;
+                    padding: .5em 1em;
+                    color: rgba(0,0,0,.8);
+                    border: transparent;
+                    background-color: #e6e6e6;
+                    text-decoration: none;
+                    border-radius: 2px;
+                }
+                table {
+                    border-collapse: collapse;
+                    width: 100%;
+                }
+
+                td, th {
+                    border: 1px solid #dddddd;
+                    text-align: left;
+                    padding: 8px;
+                }
+
+                tr:nth-child(even) {
+                    background-color: #dddddd;
+                }
+                .underline {text-decoration: underline}
+                .label {font-weight:600;}
+                .grid {display:grid}
+                .grid {
+                    grid-template-columns: 25% 75%;
+                    grid-row-gap: 30px;
+                }
+                .graybox {background-color:lightgray; padding:20px;}
+            </style>
+        {% endblock %}
+
+        {% block javascripts %}
+            {#{{ encore_entry_script_tags('app') }}#}
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}
+            <h2 class="underline">What do you want to do?</h2>
+            <div class="graybox"><a class="button" href="{{ path('list_publisher') }}">Go to publishers</a></div>
+            <div class="graybox"><a class="button" href="{{ path('list_author') }}">Go to authors</a></div>
+            <div class="graybox"><a class="button" href="{{ path('list_book') }}">Go to books</a></div>
+        {% endblock %}
+    </body>
+</html>

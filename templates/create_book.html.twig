@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('index') }}">Home</a>
+    <br />
+    <br />
+    <br />
+    {{ form_start(form) }}
+    <div class="grid">
+        <div class="label">{{ form_label(form.isbn) }}</div>
+        <div>
+            {{ form_widget(form.isbn) }}
+            {{ form_errors(form.isbn) }}
+        </div>
+
+        <div class="label">{{ form_label(form.title) }}</div>
+        <div>
+            {{ form_widget(form.title) }}
+            {{ form_errors(form.title) }}
+        </div>
+
+        <div class="label">{{ form_label(form.price) }}</div>
+        <div>
+            {{ form_widget(form.price) }}
+            {{ form_errors(form.price) }}
+        </div>
+
+        <div class="label">{{ form_label(form.publisher) }}</div>
+        <div>
+            {{ form_widget(form.publisher) }}
+            {{ form_errors(form.publisher) }}
+        </div>
+
+        <div class="label">{{ form_label(form.authors) }}</div>
+        <div>
+            {{ form_widget(form.authors) }}
+            {{ form_errors(form.authors) }}
+        </div>
+
+        <div class="label"></div>
+        <div>
+            <button>Submit</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock body %}

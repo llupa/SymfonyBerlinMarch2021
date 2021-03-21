@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2 class="underline">Price changes</h2>
+    <table>
+        <tr>
+            <th>Book</th>
+            <th>Price</th>
+            <th>Changed</th>
+        </tr>
+        {% for change in data %}
+            <tr>
+                <td>{{ change.book.title }}</td>
+                <td>{{ change.price }}</td>
+                <td>{{ change.createdAt|date }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br />
+    <a href="{{ path('list_book') }}">Back</a>
+{% endblock %}
