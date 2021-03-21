@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\API\ApiObjectBus;
+use App\API\Object\AuthorApiObject;
+use App\API\Object\BookApiObject;
+use App\API\Object\PublisherApiObject;
 use App\Entity\Author;
 use App\Entity\Book;
 use App\Entity\Publisher;
@@ -17,25 +21,26 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 
-class EditController implements ApiAwareInterface
+class EditController
 {
-    use ApiAwareTrait;
-
     private $router;
     private $formFactory;
     private $manager;
     private $twig;
+    private $bus;
 
     public function __construct(
         RouterInterface $router,
         FormFactoryInterface $formFactory,
         EntityManagerInterface $manager,
-        Environment $twig
+        Environment $twig,
+        ApiObjectBus $bus
     ) {
         $this->formFactory = $formFactory;
         $this->router = $router;
         $this->manager = $manager;
         $this->twig = $twig;
+        $this->bus = $bus;
     }
 
     /**
@@ -50,7 +55,7 @@ class EditController implements ApiAwareInterface
             $this->manager->persist($form->getNormData());
             $this->manager->flush();
 
-            $this->api->put('/authors', ['author' => $form->getNormData()]);
+            $this->bus->push(new AuthorApiObject('PUT', '/authors', $author));
 
             return new RedirectResponse($this->router->generate('list_author'));
         }
@@ -70,7 +75,7 @@ class EditController implements ApiAwareInterface
             $this->manager->persist($form->getNormData());
             $this->manager->flush();
 
-            $this->api->put('/books', ['book' => $form->getNormData()]);
+            $this->bus->push(new BookApiObject('PUT', '/books', $book));
 
             return new RedirectResponse($this->router->generate('list_book'));
         }
@@ -90,7 +95,7 @@ class EditController implements ApiAwareInterface
             $this->manager->persist($form->getNormData());
             $this->manager->flush();
 
-            $this->api->put('/publishers', ['publisher' => $form->getNormData()]);
+            $this->bus->push(new PublisherApiObject('PUT', '/publishers', $publisher));
 
             return new RedirectResponse($this->router->generate('list_publisher'));
         }

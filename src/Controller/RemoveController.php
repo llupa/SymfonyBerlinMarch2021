@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\API\ApiObjectBus;
+use App\API\Object\AuthorApiObject;
+use App\API\Object\BookApiObject;
+use App\API\Object\PublisherApiObject;
 use App\Entity\Author;
 use App\Entity\Book;
 use App\Entity\Publisher;
@@ -11,17 +15,17 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 
-class RemoveController implements ApiAwareInterface
+class RemoveController
 {
-    use ApiAwareTrait;
-
     private $router;
     private $manager;
+    private $bus;
 
-    public function __construct(RouterInterface $router, EntityManagerInterface $manager)
+    public function __construct(RouterInterface $router, EntityManagerInterface $manager, ApiObjectBus $bus)
     {
         $this->router = $router;
         $this->manager = $manager;
+        $this->bus = $bus;
     }
 
     /**
@@ -32,7 +36,7 @@ class RemoveController implements ApiAwareInterface
         $this->manager->remove($author);
         $this->manager->flush();
 
-        $this->api->delete('/authors', ['author' => $author]);
+        $this->bus->push(new AuthorApiObject('DELETE', '/authors', $author));
 
         return new RedirectResponse($this->router->generate('list_author'));
     }
@@ -45,7 +49,7 @@ class RemoveController implements ApiAwareInterface
         $this->manager->remove($book);
         $this->manager->flush();
 
-        $this->api->delete('/books', ['book' => $book]);
+        $this->bus->push(new BookApiObject('PUT', '/books', $book));
 
         return new RedirectResponse($this->router->generate('list_book'));
     }
@@ -58,7 +62,7 @@ class RemoveController implements ApiAwareInterface
         $this->manager->remove($publisher);
         $this->manager->flush();
 
-        $this->api->delete('/publishers', ['publisher' => $publisher]);
+        $this->bus->push(new PublisherApiObject('DELETE', '/publishers', $publisher));
 
         return new RedirectResponse($this->router->generate('list_publisher'));
     }

@@ -11,6 +11,15 @@ class Client implements LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
+    public function request(string $type, string $uri, array $payload): ResponseInterface
+    {
+        $this->logger->info(__METHOD__, [$type, $uri]);
+
+        sleep(random_int(1, 2));
+
+        return new MockResponse(json_encode($payload), ['location' => $uri]);
+    }
+
     public function post(string $uri, array $payload): ResponseInterface
     {
         $this->logger->info(__METHOD__, [$uri]);
