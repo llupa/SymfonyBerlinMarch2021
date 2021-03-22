@@ -24,6 +24,7 @@ class TerminateSubscriber implements ApiAwareInterface, EventSubscriberInterface
     {
         return [
             KernelEvents::TERMINATE  => 'onTerminate',
+            ConsoleEvents::TERMINATE => 'onTerminate',
         ];
     }
 
