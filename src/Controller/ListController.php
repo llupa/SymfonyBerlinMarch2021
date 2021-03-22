@@ -30,12 +30,9 @@ class ListController
         return new Response($this->twig->render('list_book.html.twig', ['data' => $repository->findAll()]));
     }
 
-    /**
-     * @ParamConverter("book", class="App\Entity\Book")
-     */
-    public function listPriceHistoryAction(PriceHistoryRepository $repository, Book $book): Response
+    public function listPriceHistoryAction(PriceHistoryRepository $repository, $id): Response
     {
-        return new Response($this->twig->render('list_price_history.html.twig', ['data' => $repository->findByBook($book)]));
+        return new Response($this->twig->render('list_price_history.html.twig', ['data' => $repository->findByBook($id)]));
     }
 
     public function listPublisherAction(PublisherRepository $repository): Response
