@@ -25,7 +25,7 @@ class PriceHistoryRepository extends ServiceEntityRepository
     public function findByBook($value)
     {
         return $this->createQueryBuilder('price_history')
-            ->andWhere('price_history.book = :val')
+            ->andWhere('price_history.book.isbn = :val')
             ->setParameter('val', $value)
             ->orderBy('price_history.id', 'DESC')
             ->getQuery()

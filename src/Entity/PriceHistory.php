@@ -30,8 +30,7 @@ class PriceHistory
     private $price;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Book")
-     * @ORM\JoinColumn(referencedColumnName="isbn")
+     * @ORM\Embedded(class="App\Entity\BookInfo")
      */
     private $book;
 
@@ -67,14 +66,14 @@ class PriceHistory
         return $this;
     }
 
-    public function getBook(): ?Book
+    public function getBook(): ?BookInfo
     {
         return $this->book;
     }
 
     public function setBook(Book $book): self
     {
-        $this->book = $book;
+        $this->book = new BookInfo($book);
 
         return $this;
     }
